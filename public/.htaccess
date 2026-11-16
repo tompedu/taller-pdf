@@ -1,0 +1,47 @@
+# Taller PDF · configuración para Apache (alojamiento compartido IONOS)
+# No necesita PHP ni base de datos: solo sirve archivos estáticos.
+
+Options -Indexes
+DirectoryIndex index.html
+
+# Forzar HTTPS
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Tipos de archivo
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType text/css .css
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddType application/octet-stream .pfb
+  AddCharset utf-8 .html .css .js .txt
+</IfModule>
+
+# Seguridad: la página solo puede cargar recursos de este mismo servidor
+# (y hablar con AutoFirma en este mismo ordenador: 127.0.0.1 y afirma://)
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; connect-src 'self' data: blob: wss://127.0.0.1:* https://127.0.0.1:*; frame-src 'self' afirma:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # Caché: la página siempre fresca; librerías y fuentes, una semana
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(js|css|woff2|pfb|ttf|svg)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+# Compresión
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml text/plain
+</IfModule>
