@@ -1,0 +1,3 @@
+autoscript.js (Cliente @firma / AutoFirma)
+Copyright Gobierno de España. Licencia dual GPL 2+ / EUPL 1.1.
+Fuente: https://github.com/ctt-gob-es/clienteafirma

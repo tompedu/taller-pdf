@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Taller PDF</title>
+<meta name="description" content="Edita, firma, une, separa y protege PDF desde el navegador. Los archivos no salen de tu equipo.">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161C28" media="(prefers-color-scheme: dark)">
+<meta name="application-name" content="Taller PDF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Taller PDF">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css?v=202611161200">
+<link rel="stylesheet" href="assets/app.css?v=202611161200">
+</head>
+<body>
+<header class="topbar"><div class="in gut">
+  <div class="logo">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 15.5 13.5 11l2 2L11 17.5H9z"/></svg></span>
+    <b>Taller PDF</b>
+  </div>
+  <button class="btn ghost homebtn" id="bHome" title="Ver todas las herramientas"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="hl">Herramientas</span></button>
+  <span class="tb-note"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Tus archivos no salen de tu equipo</span></span>
+  <div class="docname"><span>/</span><input type="text" id="docName" value="documento" aria-label="Nombre del archivo al descargar" spellcheck="false"></div>
+  <div class="tb-mid">
+    <div class="seg" role="group" aria-label="Modo de trabajo">
+      <button id="mOrg" aria-pressed="true"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="9" rx="1.5"/><rect x="3" y="15" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/></svg>Organizar</button>
+      <button id="mEdit" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>Editar</button>
+    </div>
+  </div>
+  <div class="tb-right">
+    <button class="ib" id="bUndo" title="Deshacer (Ctrl+Z)" aria-label="Deshacer"><svg class="i" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+    <button class="ib" id="bRedo" title="Rehacer (Ctrl+Mayús+Z)" aria-label="Rehacer"><svg class="i" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+    <button class="btn ghost" id="bAddTop" aria-haspopup="menu"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="addlbl">Añadir</span></button>
+    <button class="btn primary" id="bDownload"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span class="dllbl">Descargar</span></button>
+  </div>
+</div></header>
+
+<!-- INICIO -->
+<main id="homeView" class="home gut">
+  <div class="hero">
+    <h1>Edita tus PDF <em>sin complicaciones</em></h1>
+    <p>Firma, une, separa y corrige documentos desde el navegador. Sin registro y sin subir nada a internet.</p>
+  </div>
+  <div class="instcard" id="instCard" hidden>
+    <span class="ii"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path stroke="#fff" d="M18.5 7H11a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V11.5z"/><path stroke="#fff" d="M18.5 7v4.5H23"/><path stroke="#78A6FF" d="M13 20.5l4.5-4.5 2 2-4.5 4.5H13z"/></g></svg></span>
+    <div class="it"><b>Instala Taller PDF en este dispositivo</b><span>Ábrelo desde la pantalla de inicio, a pantalla completa y también sin conexión.</span></div>
+    <button class="btn primary" id="instBtn">Instalar</button>
+    <button class="ib" id="instX" aria-label="Ahora no"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="resume" id="resume" hidden>
+    <div class="rt"><svg class="i" viewBox="0 0 24 24" style="width:30px;height:30px;color:var(--accent)"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><div style="min-width:0"><b id="resumeName">documento</b><span id="resumeInfo"></span></div></div>
+    <div class="ra"><button class="btn" id="bClose">Cerrar documento</button><button class="btn primary" id="bBack">Volver al documento</button></div>
+  </div>
+  <div class="drop" id="dropCard">
+    <label class="dz">
+      <span class="big"><svg class="i" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg></span>
+      <strong>Suelta aquí tus archivos</strong>
+      <span class="btn primary lg">Elegir archivos</span>
+      <small>PDF, JPG, PNG o WEBP · Puedes elegir varios a la vez</small>
+      <input type="file" class="fileIn" multiple accept=".pdf,application/pdf,image/*" hidden>
+    </label>
+    <div class="dzalt"><span>o</span><button class="btn lg" id="bScanHome"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Escanear con la cámara</button></div>
+  </div>
+  <div style="display:grid;gap:6px;margin-top:8px"><h2>¿Qué quieres hacer?</h2>
+  <p class="sub2">Elige una tarea. Si aún no has abierto un archivo, te lo pediremos.</p></div>
+  <div class="tools" id="tools">
+      <button class="tcard feat" data-task="sign" style="--c:var(--c-violet)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M3 19c2.5 0 4-6 6-6s0 6 2.5 6 3-4 4.5-4 1 2 2 2h3"/><path d="M15 3l4 4-7 7H8v-4z"/></svg></span><b>Firmar a mano</b><span class="d">Dibuja tu firma, escríbela o sube una foto, y colócala donde haga falta.</span></button>
+      <button class="tcard feat" data-task="cert" style="--c:var(--c-blue)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 9h6M7 12h4"/><circle cx="16.5" cy="13.5" r="2.5"/><path d="m15.2 15.6-.9 4.4 2.2-1.2 2.2 1.2-.9-4.4"/></svg></span><b>Firmar con certificado digital <span class="new">Nuevo</span></b><span class="d">Con AutoFirma y los certificados instalados en tu ordenador, el DNIe o una tarjeta. Firma PAdES válida ante la Administración.</span></button>
+      <button class="tcard" data-task="edit" style="--c:var(--c-blue)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><b>Editar PDF</b><span class="d">Cambia el texto del documento o escribe encima.</span></button>
+      <button class="tcard" data-task="fill" style="--c:var(--c-blue)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h6M7 13h4"/><path d="m13.5 14.5 1.5 1.5 3-3.5"/></svg></span><b>Rellenar formulario</b><span class="d">Escribe en los huecos y marca las casillas.</span></button>
+      <button class="tcard" data-task="annotate" style="--c:var(--c-teal)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="m9 11-5 5v3h6l5-5"/><path d="m22 6-4-4-9 9 4 4z"/></svg></span><b>Resaltar y anotar</b><span class="d">Resalta, dibuja, añade formas y la fecha.</span></button>
+      <button class="tcard" data-task="censor" style="--c:var(--c-red)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6" rx="1" fill="currentColor"/><path d="M3 5h12M3 19h9"/></svg></span><b>Censurar datos</b><span class="d">Tapa en negro y elimina información sensible.</span></button>
+      <button class="tcard" data-task="merge" style="--c:var(--c-orange)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M8 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3M16 4h3a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3M9 12h6M12 9l3 3-3 3"/></svg></span><b>Unir PDF</b><span class="d">Junta varios PDF en uno, en el orden que quieras.</span></button>
+      <button class="tcard" data-task="split" style="--c:var(--c-orange)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg></span><b>Separar PDF</b><span class="d">Divide un PDF en varios archivos o extrae páginas.</span></button>
+      <button class="tcard" data-task="organize" style="--c:var(--c-orange)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="9" rx="1.5"/><rect x="3" y="15" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/></svg></span><b>Organizar páginas</b><span class="d">Ordena, duplica, elimina o inserta páginas.</span></button>
+      <button class="tcard" data-task="rotate" style="--c:var(--c-orange)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M21 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.2-9.4L21 10"/></svg></span><b>Girar páginas</b><span class="d">Endereza las páginas que han salido torcidas.</span></button>
+      <button class="tcard" data-task="compress" style="--c:var(--c-teal)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 10v8M9.5 15.5 12 18l2.5-2.5M9.5 12.5 12 10l2.5 2.5"/></svg></span><b>Comprimir PDF</b><span class="d">Reduce el tamaño de PDF con fotos o escaneos para enviarlos por correo.</span></button>
+      <button class="tcard" data-task="protect" style="--c:var(--c-red)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1.3" fill="currentColor"/></svg></span><b>Proteger con contraseña</b><span class="d">Solo podrá abrirlo quien sepa la contraseña.</span></button>
+      <button class="tcard" data-task="unlock" style="--c:var(--c-red)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg></span><b>Quitar contraseña</b><span class="d">Guarda una copia sin contraseña de un PDF cuya clave conoces.</span></button>
+      <button class="tcard" data-task="repair" style="--c:var(--c-teal)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><b>Reparar PDF</b><span class="d">Recupera PDF dañados que no se abren o se ven mal.</span></button>
+      <button class="tcard" data-task="wm" style="--c:var(--c-teal)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 17 17 7" opacity=".55"/></svg></span><b>Marca de agua</b><span class="d">Añade «COPIA», «BORRADOR» o tu propio texto.</span></button>
+      <button class="tcard" data-task="num" style="--c:var(--c-teal)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M10 4 8 20M16 4l-2 16M4 9h16M3 15h16"/></svg></span><b>Numerar páginas</b><span class="d">Pon «Página 1 de 10» en todas las páginas.</span></button>
+      <button class="tcard" data-task="scan" style="--c:var(--c-pink)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M4 12h16"/></svg></span><b>Escanear documento</b><span class="d">Haz fotos con el móvil: se recortan y enderezan solas, en color o en blanco y negro.</span></button>
+      <button class="tcard" data-task="toimg" style="--c:var(--c-pink)"><span class="ti"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v6"/><path d="M14 3v5h5v3"/><rect x="5" y="13" width="14" height="8" rx="1.5"/><path d="m8 19 2.5-2.5L13 19"/></svg></span><b>PDF a imágenes</b><span class="d">Convierte cada página en una imagen JPG.</span></button>
+  </div>
+  <div class="trust">
+    <div><svg class="i" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Privado de verdad</b><span>Los archivos se procesan en tu ordenador. No se suben a ningún servidor.</span></div>
+    <div><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><b>Sin registro ni pagos</b><span>Sin cuentas, sin pruebas que se renuevan solas y sin límites diarios.</span></div>
+    <div><svg class="i" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><b>Sin miedo a equivocarte</b><span>Todo se puede deshacer, y tu archivo original no se modifica.</span></div>
+  </div>
+  <input type="file" id="hubFile" multiple hidden>
+</main>
+
+<!-- ORGANIZAR -->
+<main id="orgView" class="org gut" hidden>
+  <section class="org-main">
+    <div class="selbar" id="selbar">
+      <span class="count" id="selCount">0 páginas</span>
+      <button class="btn ghost" id="bAll">Seleccionar todas</button>
+      <button class="btn ghost" id="bNone" hidden>Quitar selección</button>
+      <span class="sep"></span>
+      <button class="btn ghost" id="bRotL" title="Girar a la izquierda"><svg class="i" viewBox="0 0 24 24"><path d="M3 4v6h6"/><path d="M3.5 15a9 9 0 1 0 2.2-9.4L3 10"/></svg><span class="lbl">Girar</span></button>
+      <button class="btn ghost" id="bRotR" title="Girar a la derecha"><svg class="i" viewBox="0 0 24 24"><path d="M21 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.2-9.4L21 10"/></svg><span class="lbl">Girar</span></button>
+      <button class="btn ghost" id="bDup" title="Duplicar"><svg class="i" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span class="lbl">Duplicar</span></button>
+      <button class="btn ghost danger" id="bDel" title="Eliminar (Supr)"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span class="lbl">Eliminar</span></button>
+      <span class="grow"></span>
+      <button class="btn ghost" id="bRev" title="Invertir el orden de todas las páginas"><svg class="i" viewBox="0 0 24 24"><path d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"/></svg><span class="lbl">Invertir orden</span></button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>
+      <svg class="i" viewBox="0 0 24 24" style="width:40px;height:40px;color:var(--muted)"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14h6"/></svg>
+      <h2>Añade un PDF para empezar</h2>
+      <p>Arrastra aquí uno o varios PDF, o fotos de documentos. Nada sale de tu equipo.</p>
+      <label class="btn primary lg filebtn">Elegir archivos<input type="file" class="fileIn" multiple accept=".pdf,application/pdf,image/*"></label>
+    </div>
+  </section>
+
+  <aside class="insp" aria-label="Opciones de salida">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tDl" aria-selected="true" aria-controls="pDl">Descargar</button>
+      <button role="tab" id="tSplit" aria-selected="false" aria-controls="pSplit">Separar</button>
+      <button role="tab" id="tStamp" aria-selected="false" aria-controls="pStamp">Sellos</button>
+    </div>
+    <div class="tabpanel" id="pDl" role="tabpanel">
+      <div class="sec">
+        <h3>Un solo PDF</h3>
+        <p class="stat" id="dlStat"></p>
+        <button class="btn primary wide lg" id="bSave"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar PDF</button>
+        <button class="btn wide" id="bSaveSel">Descargar solo las seleccionadas</button>
+        <p class="help" id="secureNote" hidden></p>
+      </div>
+      <div class="sec" id="sCert" hidden>
+        <h3>Firma con certificado <button class="btn ghost" id="certRemove" style="min-height:30px;padding:4px 10px;font-size:12.5px">Quitar</button></h3>
+        <div class="certmini"><svg class="i" viewBox="0 0 24 24" style="color:var(--accent);width:22px;height:22px;flex:none"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg><span><b id="certMiniName"></b><span id="certMiniInfo" class="stat"></span></span></div>
+        <p class="help">Se firma al descargar. Hazlo como último paso: cualquier cambio posterior en el PDF anula la firma.</p>
+        <button class="btn wide" id="certEdit">Cambiar datos de la firma</button>
+      </div>
+      <div class="sec" id="sCmp" data-off>
+        <h3>Reducir tamaño <span class="tog"><input type="checkbox" id="cmpOn" aria-label="Reducir el tamaño del PDF"><span></span></span></h3>
+        <p class="help">Comprime las fotos y los escaneos. El texto y los dibujos no cambian.</p>
+        <div class="body">
+          <div class="choice" id="cmpLevel">
+            <label><input type="radio" name="cl" value="low"> <span><b>Poca</b> · casi sin pérdida de calidad</span></label>
+            <label><input type="radio" name="cl" value="mid" checked> <span><b>Recomendada</b> · buena calidad, mucho menos peso</span></label>
+            <label><input type="radio" name="cl" value="high"> <span><b>Máxima</b> · para enviar por correo; se nota en las fotos</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="sec" id="sPw" data-off>
+        <h3>Proteger con contraseña <span class="tog"><input type="checkbox" id="pwOn" aria-label="Proteger con contraseña"><span></span></span></h3>
+        <p class="help">Para abrir el PDF habrá que escribir la contraseña. Se aplica a todo lo que descargues, también al separar.</p>
+        <div class="body">
+          <label class="f" for="pw1">Contraseña</label>
+          <div class="pwrow"><input type="password" id="pw1" autocomplete="new-password" spellcheck="false"><button class="ib" id="pwEye" type="button" aria-label="Mostrar la contraseña" title="Mostrar u ocultar"><svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+          <label class="f">Repite la contraseña<input type="password" id="pw2" autocomplete="new-password" spellcheck="false"></label>
+          <p class="pwmsg" id="pwMsg" aria-live="polite"></p>
+          <label class="cb"><input type="checkbox" id="pwNoCopy"> Impedir copiar el texto y modificar el PDF</label>
+          <p class="help">Apúntala en un lugar seguro: si se olvida, no hay forma de abrir el documento.</p>
+        </div>
+      </div>
+      <div class="sec">
+        <h3>Como imágenes</h3>
+        <button class="btn wide" id="bToImg"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>Descargar las páginas como JPG</button>
+        <p class="help">Una imagen por página. Si hay varias, se descargan juntas en un .zip.</p>
+      </div>
+      <div class="sec">
+        <h3>Fotos que añadas</h3>
+        <label class="f">Cada foto se convierte en una página<select id="imgMode"><option value="a4">Tamaño A4, con margen</option><option value="fit">Del tamaño de la foto</option></select></label>
+      </div>
+    </div>
+    <div class="tabpanel" id="pSplit" role="tabpanel" hidden>
+      <div class="sec">
+        <h3>Separar en varios PDF</h3>
+        <div class="choice" id="splitMode">
+          <label><input type="radio" name="sm" value="each" checked> Una página por archivo</label>
+          <label><input type="radio" name="sm" value="every"> Cada <input type="number" class="everyN" id="everyN" min="1" value="2" aria-label="Número de páginas por archivo"> páginas</label>
+          <label><input type="radio" name="sm" value="ranges"> Por rangos</label>
+        </div>
+        <label class="f" id="rangesWrap">Rangos, según el orden actual<input type="text" id="ranges" placeholder="Ej.: 1-3, 4, 5-8"></label>
+        <p class="stat" id="splitStat"></p>
+        <button class="btn primary wide lg" id="bSplit">Separar y descargar</button>
+        <p class="help">Las páginas llevan el color del archivo al que irán. Si salen varios archivos, se descargan juntos en un .zip.</p>
+      </div>
+    </div>
+    <div class="tabpanel" id="pStamp" role="tabpanel" hidden>
+      <div class="sec" id="sWm" data-off>
+        <h3>Marca de agua <span class="tog"><input type="checkbox" id="wmOn" aria-label="Añadir marca de agua"><span></span></span></h3>
+        <p class="help">Un texto grande y suave en todas las páginas.</p>
+        <div class="body">
+          <label class="f">Texto<input type="text" id="wmText" value="COPIA"></label>
+          <div class="row">
+            <label class="f">Color<select id="wmColor"><option value="gray">Gris</option><option value="red">Rojo</option><option value="blue">Azul</option></select></label>
+            <label class="f">Dirección<select id="wmAngle"><option value="45">Diagonal</option><option value="0">Horizontal</option></select></label>
+          </div>
+          <label class="f">Tamaño <output id="wmSizeO">80 pt</output><input type="range" id="wmSize" min="24" max="160" value="80"></label>
+          <label class="f">Intensidad <output id="wmOpO">20 %</output><input type="range" id="wmOp" min="5" max="70" value="20"></label>
+        </div>
+      </div>
+      <div class="sec" id="sNum" data-off>
+        <h3>Números de página <span class="tog"><input type="checkbox" id="numOn" aria-label="Añadir números de página"><span></span></span></h3>
+        <div class="body">
+          <label class="f">Formato<select id="numFmt"><option value="n">3</option><option value="pn">Página 3</option><option value="pnt" selected>Página 3 de 12</option><option value="nt">3 / 12</option></select></label>
+          <div class="row">
+            <label class="f">Posición<select id="numPos"><option value="bc">Abajo, centrado</option><option value="br">Abajo, a la derecha</option><option value="tr">Arriba, a la derecha</option></select></label>
+            <label class="f">Primer número<input type="number" id="numStart" min="0" value="1"></label>
+          </div>
+          <label class="cb"><input type="checkbox" id="numSkip"> Sin número en la portada</label>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<!-- EDITAR -->
+<main id="editView" class="edit" hidden>
+  <nav class="strip" id="strip" aria-label="Páginas"></nav>
+  <div class="ewrap">
+    <div class="dockwrap gut">
+      <div class="dock" id="dock" role="toolbar" aria-label="Herramientas">
+        <button class="tool" data-tool="select" title="Seleccionar y mover (V)"><svg class="i" viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.5L10 19z"/></svg>Mover</button>
+        <span class="dv"></span>
+        <button class="tool" data-tool="text" title="Escribir texto (T)"><svg class="i" viewBox="0 0 24 24"><path d="M5 6V4h14v2M12 4v16M9 20h6"/></svg>Texto</button>
+        <button class="tool" data-tool="edittext" title="Editar el texto del PDF (E)"><svg class="i" viewBox="0 0 24 24"><path d="M4 7V5h10v2M9 5v12M7 17h4"/><path d="M14 19h2.5L21 14.5 18.5 12 14 16.5z"/></svg>Editar texto</button>
+        <span class="dv"></span>
+        <button class="tool" data-tool="whiteout" title="Tapar una zona (W)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h10" opacity=".35"/></svg>Tapar</button>
+        <button class="tool" data-tool="highlight" title="Resaltar (H)"><svg class="i" viewBox="0 0 24 24"><path d="m9 11-5 5v3h6l5-5"/><path d="m22 6-4-4-9 9 4 4z"/></svg>Resaltar</button>
+        <button class="tool" data-tool="ink" title="Dibujar a mano (D)"><svg class="i" viewBox="0 0 24 24"><path d="M3 17c3-4 5-6 7-6s1 5 3 5 3-6 5-6 2 2 3 3"/></svg>Dibujar</button>
+        <button class="tool" data-tool="shape" title="Formas (F)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="10" height="10" rx="1.5"/><circle cx="15.5" cy="15.5" r="5.5"/></svg>Formas</button>
+        <span class="dv"></span>
+        <button class="tool" data-tool="mark" title="Marcar casillas (M)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m7.5 12.5 3 3 6-7"/></svg>Marcas</button>
+        <button class="tool" data-tool="date" title="Fecha de hoy"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Fecha</button>
+        <button class="tool" data-tool="sign" title="Firmar"><svg class="i" viewBox="0 0 24 24"><path d="M3 19c2.5 0 4-6 6-6s0 6 2.5 6 3-4 4.5-4 1 2 2 2h3"/><path d="M15 3l4 4-7 7H8v-4z"/></svg>Firmar</button>
+        <button class="tool" data-tool="image" title="Insertar imagen"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>Imagen</button>
+        <span class="dv"></span>
+        <div class="zoom">
+          <button class="ib" id="zOut" title="Alejar" aria-label="Alejar"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+          <output id="zLbl" title="Ajustar al ancho" tabindex="0" role="button">100 %</output>
+          <button class="ib" id="zIn" title="Acercar" aria-label="Acercar"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+      <div class="hint" id="hint" aria-live="polite"></div>
+    </div>
+    <div class="pages" id="pages"></div>
+  </div>
+</main>
+
+<div class="ftb" id="ftb" hidden role="toolbar" aria-label="Opciones del elemento"></div>
+
+<!-- Menú añadir -->
+<div class="menu" id="addMenu" hidden role="menu">
+  <label role="menuitem"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF o fotos…<input type="file" id="menuFile" multiple accept=".pdf,application/pdf,image/*"></label>
+  <button role="menuitem" id="miScan"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Escanear con la cámara</button>
+  <button role="menuitem" id="miBlank"><svg class="i" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/></svg>Página en blanco</button>
+</div>
+
+<!-- Escáner -->
+<div class="modal scanm" id="scanModal" hidden role="dialog" aria-modal="true" aria-labelledby="scanTitle">
+  <div class="dlg scandlg">
+    <header><h2 id="scanTitle">Escanear documento</h2><span class="scount" id="scanCount"></span><button class="ib" id="scanClose" aria-label="Cerrar"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="scanbody">
+      <div class="scanstart" id="scanStart">
+        <span class="bigcam"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+        <p class="lead">Pon el documento sobre una superficie oscura, con buena luz y sin sombras.</p>
+        <div class="seg scanmode" role="group" aria-label="Tipo de escaneo"><button data-smode="color" aria-pressed="true">Color</button><button data-smode="gray" aria-pressed="false">Grises</button><button data-smode="bw" aria-pressed="false">Blanco y negro</button></div>
+        <label class="btn primary lg filebtn"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Hacer foto<input type="file" id="scanCam" accept="image/*" capture="environment"></label>
+        <label class="btn filebtn">Elegir fotos de la galería<input type="file" id="scanGal" accept="image/*" multiple></label>
+      </div>
+      <div class="scanadj" id="scanAdj" hidden>
+        <div class="scanstage" id="scanStage">
+          <div class="scanwrap" id="scanWrap"><canvas id="scanCanvas"></canvas><svg id="scanSvg" aria-hidden="true"></svg><canvas class="loupe" id="scanLoupe" width="240" height="240" hidden></canvas></div>
+        </div>
+        <p class="scanhint" id="scanHint">Arrastra las esquinas azules hasta los bordes del documento.</p>
+      </div>
+      <div class="scanres" id="scanRes" hidden>
+        <div class="scanstage"><img id="scanOut" alt="Página escaneada"></div>
+        <div class="scanthumbs" id="scanThumbs"></div>
+      </div>
+    </div>
+    <footer id="scanFoot"></footer>
+  </div>
+</div>
+
+<!-- Contraseña al abrir -->
+<div class="modal" id="taskModal" hidden role="dialog" aria-modal="true" aria-labelledby="taskTitle">
+  <div class="dlg" style="width:min(400px,100%)">
+    <header><h2 id="taskTitle"></h2><button class="ib" id="taskClose" aria-label="Cerrar"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="content"><p id="taskText" style="margin:0;font-size:15px;color:var(--ink-2)"></p></div>
+    <footer><button class="btn" id="taskCancel">Ahora no</button><button class="btn primary" id="taskGo"></button></footer>
+  </div>
+</div>
+<div class="modal" id="instModal" hidden role="dialog" aria-modal="true" aria-labelledby="instTitle">
+  <div class="dlg" style="width:min(440px,100%)">
+    <header><h2 id="instTitle">Añadir a la pantalla de inicio</h2><button class="ib" id="instClose" aria-label="Cerrar"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="content"><ol class="isteps" id="instSteps"></ol><p class="help" id="instNote" style="margin-top:14px"></p></div>
+    <footer><button class="btn primary" id="instOk">Entendido</button></footer>
+  </div>
+</div>
+<div class="modal" id="shareModal" hidden role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+  <div class="dlg" style="width:min(420px,100%)">
+    <header><h2 id="shareTitle">Tu archivo está listo</h2></header>
+    <div class="content"><p style="margin:0 0 6px;font-weight:600;word-break:break-all" id="shareName"></p><p class="help">Pulsa «Guardar o enviar» y elige <b>Guardar en Archivos</b>, Mail, WhatsApp o la app que prefieras.</p></div>
+    <footer><button class="btn" id="shareCancel">Cancelar</button><button class="btn primary" id="shareOk"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>Guardar o enviar</button></footer>
+  </div>
+</div>
+<div class="modal" id="openPwModal" hidden role="dialog" aria-modal="true" aria-labelledby="opwTitle">
+  <div class="dlg" style="width:min(420px,100%)">
+    <header><h2 id="opwTitle">Este PDF tiene contraseña</h2></header>
+    <form class="content" id="opwForm">
+      <p class="help" id="opwName" style="font-size:13.5px"></p>
+      <label class="f">Contraseña<input type="password" id="opwInput" autocomplete="current-password" spellcheck="false"></label>
+      <p class="pwmsg bad" id="opwErr" aria-live="polite"></p>
+    </form>
+    <footer><button class="btn" id="opwCancel" type="button">No abrir</button><button class="btn primary" id="opwOk" type="button">Abrir</button></footer>
+  </div>
+</div>
+
+<!-- Firma con certificado (AutoFirma) -->
+<div class="modal" id="certModal" hidden role="dialog" aria-modal="true" aria-labelledby="certTitle">
+  <div class="dlg">
+    <header><h2 id="certTitle">Firmar con certificado digital</h2><button class="ib" id="certClose" aria-label="Cerrar"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="content">
+      <div class="sec" style="gap:12px">
+        <div class="certcard"><span class="ci"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="m9 10 2 2 4-4"/></svg></span><b>Se firma con AutoFirma</b><span class="d" style="font-size:13px;color:var(--ink-2)">Al descargar se abrirá AutoFirma para que elijas tu certificado: los instalados en este ordenador, el DNIe o una tarjeta.</span></div>
+        <p class="pwmsg bad" id="afirmaOff" hidden>Esta opción solo funciona en la versión publicada en vuestro servidor. En esta vista previa no se puede abrir AutoFirma.</p>
+        <p class="pwmsg bad" id="certErr" aria-live="polite"></p>
+        <div class="row"><label class="f">Motivo (opcional)<input type="text" id="afReason" placeholder="Ej.: Conforme"></label><label class="f">Lugar (opcional)<input type="text" id="afLoc" placeholder="Ej.: Ávila"></label></div>
+        <label class="cb"><input type="checkbox" id="afVisible" checked> Mostrar un sello con mis datos en el documento</label>
+        <p class="help">¿No tienes AutoFirma? Descárgala gratis de firmaelectronica.gob.es (sección Descargas). La primera vez, el navegador te preguntará si permites abrirla: pulsa «Abrir» o «Permitir».</p>
+      </div>
+    </div>
+    <footer><button class="btn" id="certCancel">Cancelar</button><button class="btn primary" id="certNext">Colocar el sello</button></footer>
+  </div>
+</div>
+
+<!-- Firma -->
+<div class="modal" id="sigModal" hidden role="dialog" aria-modal="true" aria-labelledby="sigTitle">
+  <div class="dlg">
+    <header><h2 id="sigTitle">Tu firma</h2><button class="ib" id="sigClose" aria-label="Cerrar"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="tabs" role="tablist" style="margin:8px 12px 0">
+      <button role="tab" data-sig="draw" aria-selected="true">Dibujar</button>
+      <button role="tab" data-sig="type" aria-selected="false">Escribir</button>
+      <button role="tab" data-sig="upload" aria-selected="false">Subir imagen</button>
+    </div>
+    <div class="content">
+      <div data-sigp="draw" class="sec" style="gap:10px">
+        <div class="padwrap"><canvas class="pad" id="pad" width="1200" height="400" aria-label="Zona para dibujar la firma"></canvas><span class="base"></span><span class="ph" id="padPh">Firma aquí con el ratón, el dedo o un lápiz</span></div>
+        <div class="swrow"><span class="help">Color</span><button class="swatch" data-pc="#14246b" style="background:#14246b" aria-label="Azul" aria-pressed="true"></button><button class="swatch" data-pc="#111111" style="background:#111" aria-label="Negro" aria-pressed="false"></button><span style="flex:1"></span><button class="btn ghost" id="padClear">Borrar</button></div>
+      </div>
+      <div data-sigp="type" class="sec" hidden style="gap:10px">
+        <label class="f">Tu nombre<input type="text" id="sigName" placeholder="Nombre y apellidos" autocomplete="name"></label>
+        <div class="fontopts" id="fontOpts"></div>
+      </div>
+      <div data-sigp="upload" class="sec" hidden style="gap:10px">
+        <label class="upbox filebtn" id="upBox"><span id="upMsg">Elige una foto o escaneo de tu firma (PNG o JPG). Quitaremos el fondo blanco.</span><img id="upImg" alt="Vista previa de la firma" hidden><input type="file" id="sigFile" accept="image/png,image/jpeg,image/webp"></label>
+      </div>
+      <div class="sec" id="recentWrap" hidden style="gap:8px">
+        <h3 style="font-size:12.5px;color:var(--muted);font-weight:500">Usadas en esta sesión</h3>
+        <div class="recent" id="recent"></div>
+      </div>
+    </div>
+    <footer><button class="btn" id="sigCancel">Cancelar</button><button class="btn primary" id="sigUse">Colocar firma</button></footer>
+  </div>
+</div>
+
+<input type="file" id="imgPick" accept="image/png,image/jpeg,image/webp" hidden>
+<div class="dropov" id="dropov" hidden><div><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Suelta para añadir los archivos</div></div>
+<div class="busy" id="busy" hidden><div><span class="spin"></span><span><span id="busyMsg">Procesando…</span><span class="tip" id="busyTip"></span></span></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/Sortable.min.js"></script>
+<script src="vendor/autoscript.js"></script>
+<script src="assets/js/config.js?v=202611161200"></script>
+<script src="assets/js/nucleo.js?v=202611161200"></script>
+<script src="assets/js/estado.js?v=202611161200"></script>
+<script src="assets/js/archivos.js?v=202611161200"></script>
+<script src="assets/js/ajustes.js?v=202611161200"></script>
+<script src="assets/js/elementos.js?v=202611161200"></script>
+<script src="assets/js/organizar.js?v=202611161200"></script>
+<script src="assets/js/editor.js?v=202611161200"></script>
+<script src="assets/js/firma.js?v=202611161200"></script>
+<script src="assets/js/autofirma.js?v=202611161200"></script>
+<script src="assets/js/escaner.js?v=202611161200"></script>
+<script src="assets/js/comprimir.js?v=202611161200"></script>
+<script src="assets/js/exportar.js?v=202611161200"></script>
+<script src="assets/js/render.js?v=202611161200"></script>
+<script src="assets/js/instalable.js?v=202611161200"></script>
+<script src="assets/js/inicio.js?v=202611161200"></script>
+</body>
+</html>

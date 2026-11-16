@@ -1,0 +1,14 @@
+{
+  "name": "taller-pdf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Herramienta web para trabajar con PDF sin que los documentos salgan del dispositivo",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "node tools/servidor.js",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

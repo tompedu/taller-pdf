@@ -1,0 +1,4 @@
+# Herramienta interna: que no aparezca en buscadores.
+# Si queréis que sea pública y se pueda encontrar en Google, borrad este archivo.
+User-agent: *
+Disallow: /

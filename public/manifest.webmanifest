@@ -1,0 +1,124 @@
+{
+  "id": "./",
+  "name": "Taller PDF",
+  "short_name": "Taller PDF",
+  "lang": "es",
+  "dir": "ltr",
+  "description": "Edita, firma, une, separa, escanea y protege PDF. Los archivos no salen de tu dispositivo.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5F7FB",
+  "theme_color": "#FFFFFF",
+  "categories": [
+    "productivity",
+    "utilities",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Escanear documento",
+      "short_name": "Escanear",
+      "description": "Haz una foto a un documento y conviértelo en PDF",
+      "url": "./?accion=escanear",
+      "icons": [
+        {
+          "src": "icons/sc-escanear.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Firmar un PDF",
+      "short_name": "Firmar",
+      "description": "Firma un PDF a mano",
+      "url": "./?accion=firmar",
+      "icons": [
+        {
+          "src": "icons/sc-firmar.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Unir varios PDF",
+      "short_name": "Unir PDF",
+      "description": "Junta varios PDF en uno",
+      "url": "./?accion=unir",
+      "icons": [
+        {
+          "src": "icons/sc-unir.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Editar un PDF",
+      "short_name": "Editar",
+      "description": "Cambia el texto o escribe encima de un PDF",
+      "url": "./?accion=editar",
+      "icons": [
+        {
+          "src": "icons/sc-editar.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "./compartir",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "files": [
+        {
+          "name": "files",
+          "accept": [
+            "application/pdf",
+            ".pdf",
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/*"
+          ]
+        }
+      ]
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "./",
+      "accept": {
+        "application/pdf": [
+          ".pdf"
+        ]
+      }
+    }
+  ]
+}
